@@ -1,0 +1,8 @@
+.bg-picture {
+    background-image: url('/blackground.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+   
+}
