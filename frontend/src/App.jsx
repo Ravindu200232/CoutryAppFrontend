@@ -12,7 +12,7 @@ import "./css/home.css";
 
 function App() {
   return (
-    <GoogleOAuthProvider clientId="93119756985-3cvvkvdu7epn3h2k0i53pg5i17o9b3ji.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId="870519791887-8h9r383d2ekpe059h4vab0rofknfluu9.apps.googleusercontent.com">
       <BrowserRouter>
         <Toaster position="top-right" />
         <Routes path="/">
@@ -20,7 +20,6 @@ function App() {
           <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="/login/*" element={<Login />} />
           <Route path="/signup/*" element={<Signup />} />
-        
         </Routes>
       </BrowserRouter>
     </GoogleOAuthProvider>
