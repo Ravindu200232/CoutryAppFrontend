@@ -59,7 +59,7 @@ const CountryDetail = ({ country }) => {
   if (!country) return null;
 
   return (
-    <div className="bg-gradient-to-r  from- to-slate-100 dark:from-gray-800 dark:to-gray-900 p-6 rounded-2xl shadow-lg max-w-6xl mx-auto mt-10 relative">
+    <div className="bg-gradient-to-r  from to-slate-100 dark:from-gray-800 dark:to-gray-900 p-6 rounded-2xl shadow-lg max-w-6xl mx-auto mt-10 relative">
       <div className="flex flex-col md:flex-row gap-6 items-start">
         <img
           src={country.flag}
