@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Globe2, Users, Landmark } from "lucide-react";
 
-const CountryCard = ({ country }) => (
-  <Link to={`/country/${country.alpha3Code}`} className="block">
-    <div className="bg-gradient-to-br from- to-slate-100 border border-gray-200 rounded-2xl shadow-md hover:shadow-xl hover:scale-[1.03] transition-all duration-300 p-4">
-      <img
+const CountryCard = ({ country }) => {
+
+ 
+
+  return (
+    <Link to={`/country/${country.alpha3Code}`} className="block">
+    <div className="bg-gradient-to-br from- to-slate-100 border border-gray-200 rounded-2xl shadow-md hover:s</Link>hadow-xl hover:scale-[1.03] transition-all duration-300 p-4">
+      <img 
         src={country.flag}
         alt={`${country.name} flag`}
         className="w-full h-40 object-cover rounded-xl mb-4 shadow-sm"
@@ -31,6 +35,7 @@ const CountryCard = ({ country }) => (
       </div>
     </div>
   </Link>
-);
+  );
+};
 
 export default CountryCard;

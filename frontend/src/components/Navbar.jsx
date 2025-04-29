@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { HiMenuAlt3, HiX } from "react-icons/hi"; // Hamburger and close icons
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -19,7 +20,8 @@ const Navbar = () => {
       if (!document.getElementById("google-translate-script")) {
         const script = document.createElement("script");
         script.id = "google-translate-script";
-        script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+        script.src =
+          "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
         document.body.appendChild(script);
       }
     };
@@ -29,7 +31,8 @@ const Navbar = () => {
         {
           pageLanguage: "en",
           includedLanguages: "en,si,ta,fr,es,de,zh-CN,hi,ja,ko,ar", // you can add more languages here
-          layout: window.google.translate.TranslateElement.InlineLayout.HORIZONTAL,
+          layout:
+            window.google.translate.TranslateElement.InlineLayout.HORIZONTAL,
         },
         "google_translate_element"
       );
@@ -41,12 +44,21 @@ const Navbar = () => {
   return (
     <nav className="bg-primary text-white p-4 shadow-md fixed w-full top-0 z-50">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <Link to="/home" className="text-2xl font-bold">
-          CountryApp
+        <DotLottieReact
+          className="w-[100px]"
+          src="https://lottie.host/dde6c4a5-769f-4090-b9c2-89d40279ba73/Z4Lq47T21F.lottie"
+          loop
+          autoplay
+        />
+        <Link to="/" className="text-2xl  flex-row font-bold w-[100px]">
+          <div>WorldWay</div>
         </Link>
 
         {/* Google Translate Dropdown */}
-        <div id="google_translate_element" className="hidden md:block ml-4"></div>
+        <div
+          id="google_translate_element"
+          className="hidden md:block ml-4"
+        ></div>
 
         {/* Mobile menu toggle button */}
         <button

@@ -6,3 +6,34 @@
     background-attachment: fixed;
    
 }
+
+
+@keyframes typing {
+    0% {
+      transform: translateX(100%); 
+      width: 0;
+    }
+    50% {
+      transform: translateX(0); 
+      width: 100%; 
+    }
+    100% {
+      transform: translateX(-100%); 
+      width: 0;
+    }
+  }
+  
+  @keyframes blink {
+    50% { border-color: transparent; }
+  }
+  
+  .typing-animation {
+    display: inline-block;
+    font-size: 2rem;
+    white-space: nowrap;
+    overflow: hidden; 
+    animation: typing 5s steps(40) infinite, blink 0.75s step-end infinite;
+    transform: translateX(100%); 
+    width: 0;
+  }
+  

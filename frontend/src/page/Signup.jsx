@@ -9,9 +9,8 @@ export function Signup() {
     password: '',
     repassword: '',
   });
-  const navigate = useNavigate();
-
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -44,21 +43,34 @@ export function Signup() {
         password: formData.password,
       };
       localStorage.setItem('user', JSON.stringify(userData));
-      toast.success("User Registration Successfully")
-      navigate("/login")
+      toast.success("User Registration Successfully");
+      navigate("/login");
       setFormData({ username: '', email: '', password: '', repassword: '' });
     }
   };
 
   return (
-    <div className="min-h-screen flex">
-      {/* Left Section (Form) */}
-      <div className="w-full md:w-1/2 flex items-center justify-center p-8">
+    <div className="min-h-screen flex bg-gradient-to-r from-green-100 to-white overflow-hidden">
+      
+      {/* Left Image Grid */}
+      <div className="hidden md:grid md:w-1/2 grid-cols-3 grid-rows-4 gap-2 p-4 h-screen overflow-hidden">
+        <img src="/1.jpg" alt="img1" className="col-span-2 row-span-2 w-full h-full object-cover rounded-lg" />
+        <img src="/2.jpg" alt="img2" className="w-full h-full object-cover rounded-lg" />
+        <img src="/3.jpg" alt="img3" className="col-span-1 row-span-2 w-full h-full object-cover rounded-lg" />
+        <img src="/4.jpg" alt="img4" className="w-full h-full object-cover rounded-lg" />
+        <img src="/5.jpg" alt="img5" className="w-full h-full object-cover rounded-lg" />
+        <img src="/6.jpg" alt="img6" className="w-full h-full object-cover rounded-lg" />
+        <img src="/7.jpg" alt="img7" className="w-full h-full object-cover rounded-lg" />
+        <img src="/8.jpg" alt="img8" className="w-full h-full object-cover rounded-lg" />
+      </div>
+
+      {/* Right Signup Form */}
+      <div className="w-full md:w-1/2 flex items-center justify-center p-8 bg-white md:rounded-l-3xl shadow-xl">
         <div className="max-w-md w-full space-y-8">
           <div>
-            <h2 className="text-3xl font-bold text-gray-900">Create your account</h2>
-            <p className="mt-2 text-sm text-gray-600">
-              Already registered? <a href="/login" className="text-indigo-600 hover:underline">Sign in</a>
+            <h2 className="text-3xl font-bold text-gray-900 text-center">Create your account</h2>
+            <p className="mt-2 text-sm text-gray-600 text-center">
+              Already registered? <Link to="/login" className="text-indigo-600 hover:underline">Sign in</Link>
             </p>
           </div>
           <form onSubmit={handleSubmit} className="space-y-5">
@@ -113,17 +125,17 @@ export function Signup() {
               Sign up
             </button>
           </form>
-          <div className='hover:text-red-400'><Link to="/login">Already have Account ?</Link></div>
+          <div className="text-center text-sm text-gray-500">or</div>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 w-full">
+              <img src="https://www.svgrepo.com/show/355037/google.svg" alt="Google" className="w-5 h-5 mr-2" />
+              Sign up with Google
+            </button>
+            <button className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 w-full" onClick={() => navigate("/login")}>
+              Login
+            </button>
+          </div>
         </div>
-      </div>
-
-      {/* Right Section (Image) */}
-      <div className="hidden md:block md:w-1/2 bg-gray-100">
-        <img
-          src="/blackground.jpg" // Replace this with your image
-          alt="Signup visual"
-          className="w-full h-full object-cover"
-        />
       </div>
     </div>
   );

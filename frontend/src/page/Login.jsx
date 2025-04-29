@@ -23,23 +23,34 @@ export function Login() {
     const userData = JSON.parse(storedUser);
     if (formData.email === userData.email && formData.password === userData.password) {
       setError('');
-      toast.success("Login successfully")
-      navigate('/home');
+      toast.success("Login successfully");
+      navigate('/');
     } else {
       setError('Invalid email or password.');
     }
   };
 
   return (
-    <div className="min-h-screen flex">
-      {/* Left Section (Login Form) */}
-      <div className="w-full md:w-1/2 flex items-center justify-center p-8">
+    <div className="min-h-screen flex bg-gradient-to-r from-green-100 to-white overflow-hidden">
+      
+      {/* Left Grid Section */}
+      <div className="hidden md:grid md:w-1/2 grid-cols-3 grid-rows-4 gap-2 p-4 h-screen overflow-hidden">
+        <img src="/1.jpg" alt="Office workspace" className="col-span-2 row-span-2 w-full h-full object-cover rounded-lg" />
+        <img src="/2.jpg" alt="Collaboration" className="w-full h-full object-cover rounded-lg" />
+        <img src="/3.jpg" alt="Team discussion" className="col-span-1 row-span-2 w-full h-full object-cover rounded-lg" />
+        <img src="/4.jpg" alt="Desk setup" className="w-full h-full object-cover rounded-lg" />
+        <img src="/5.jpg" alt="Brainstorm session" className="w-full h-full object-cover rounded-lg" />
+        <img src="/6.jpg" alt="Meeting room" className="w-full h-full object-cover rounded-lg" />
+        <img src="/7.jpg" alt="Modern office" className="w-full h-full object-cover rounded-lg" />
+        <img src="/8.jpg" alt="Teamwork in action" className="w-full h-full object-cover rounded-lg" />
+      </div>
+
+      {/* Right Form Section */}
+      <div className="w-full md:w-1/2 flex items-center justify-center p-8 bg-white md:rounded-l-3xl shadow-xl">
         <div className="max-w-md w-full space-y-8">
           <div>
-            <h2 className="mt-6 text-3xl font-bold text-gray-900">Sign in to your account</h2>
-            <p className="mt-2 text-sm text-gray-600">
-              Not a member? <a href="#" className="text-indigo-600 hover:underline">Start a 14 day free trial</a>
-            </p>
+            <h2 className="text-3xl font-bold text-gray-900 text-center">Sign in to WorldWay</h2>
+            <p className="mt-2 text-sm text-gray-600 text-center">Welcome to WorldWay, please enter your login details below.</p>
           </div>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
@@ -51,7 +62,7 @@ export function Login() {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
             <div>
@@ -63,49 +74,34 @@ export function Login() {
                 value={formData.password}
                 onChange={handleChange}
                 required
-                className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
             {error && <p className="text-red-500 text-sm">{error}</p>}
-            <div className="flex items-center justify-between">
-              <label className="flex items-center">
-                <input type="checkbox" className="mr-2" />
-                <span className="text-sm text-gray-600">Remember me</span>
+            <div className="flex justify-between items-center">
+              <label className="flex items-center text-sm text-gray-600">
+                <input type="checkbox" className="mr-2" /> Remember me
               </label>
-              <a href="#" className="text-sm text-indigo-600 hover:underline">Forgot password?</a>
+              <a href="#" className="text-sm text-blue-600 hover:underline">Forgot password?</a>
             </div>
             <button
               type="submit"
-              className="w-full py-2 px-4 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700"
+              className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700"
             >
-              Sign in
+              Login
             </button>
           </form>
-          <div className="relative text-center text-sm text-gray-500">
-            <span className="px-2 bg-white">Or continue with</span>
-          </div>
-          <div className="flex gap-4 justify-center">
-            <button className="flex items-center px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50">
+          <div className="text-center text-sm text-gray-500">or</div>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 w-full">
               <img src="https://www.svgrepo.com/show/355037/google.svg" alt="Google" className="w-5 h-5 mr-2" />
-              Google
+              Sign in with Google
             </button>
-            <button className="flex items-center px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 " onClick={()=>{
-                navigate("/signup")
-            }}>
-              
+            <button className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 w-full" onClick={() => navigate("/signup")}>
               Sign Up
             </button>
           </div>
         </div>
-      </div>
-
-      {/* Right Section (Image) */}
-      <div className="hidden md:block md:w-1/2 bg-gray-100">
-        <img
-          src="/blackground.jpg" // Replace with your actual image path or import
-          alt="Login visual"
-          className="w-full h-full object-cover"
-        />
       </div>
     </div>
   );
