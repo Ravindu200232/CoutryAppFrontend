@@ -1,10 +1,49 @@
 import { MdNavigateBefore } from "react-icons/md";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const CountryDetail = ({ country }) => {
+  const [isSpeaking, setIsSpeaking] = useState(false);
+
+  const speakDetails = () => {
+    if (!country) return;
+
+    const textToSpeak = `
+      Country Name: ${country.name}.
+      Official Name: ${country.name}.
+      Native Name: ${country.nativeName}.
+      Capital: ${country.capital || 'Not Available'}.
+      Region: ${country.region}.
+      Subregion: ${country.subregion}.
+      Population: ${country.population.toLocaleString()}.
+      Area: ${country.area ? country.area.toLocaleString() + ' square kilometers' : 'Not Available'}.
+    `;
+
+    const utterance = new SpeechSynthesisUtterance(textToSpeak);
+    utterance.lang = 'en-US';
+    utterance.onend = () => setIsSpeaking(false);
+
+    speechSynthesis.speak(utterance);
+    setIsSpeaking(true);
+  };
+
+  const stopSpeaking = () => {
+    speechSynthesis.cancel();
+    setIsSpeaking(false);
+  };
+
+  useEffect(() => {
+    speakDetails(); // Auto start speaking when component mounts
+
+    return () => {
+      stopSpeaking(); // Stop speaking when component unmounts
+    };
+  }, [country]);
+
+  if (!country) return null;
+
   return (
-    <div className="bg-gradient-to-r from- to-slate-100 dark:from-gray-800 dark:to-gray-900 p-6 rounded-2xl shadow-lg max-w-6xl mx-auto mt-10">
+    <div className="bg-gradient-to-r from- to-slate-100 dark:from-gray-800 dark:to-gray-900 p-6 rounded-2xl shadow-lg max-w-6xl mx-auto mt-10 relative">
       <div className="flex flex-col md:flex-row gap-6 items-start">
         <img
           src={country.flag}
@@ -27,7 +66,6 @@ const CountryDetail = ({ country }) => {
           {country.latlng.length > 0 && (
             <p><span className="font-semibold">Latitude / Longitude:</span> {country.latlng.join(", ")}</p>
           )}
-
           {country.latlng.length === 2 && (
             <div className="mt-4">
               <h3 className="font-semibold mb-1">Map View:</h3>
@@ -42,7 +80,6 @@ const CountryDetail = ({ country }) => {
               />
             </div>
           )}
-
           <p><span className="font-semibold">Timezones:</span> {country.timezones?.join(", ")}</p>
           <p><span className="font-semibold">Borders:</span> {country.borders?.join(", ") || 'None'}</p>
           <p><span className="font-semibold">Top-Level Domain:</span> {country.topLevelDomain?.join(", ")}</p>
@@ -57,6 +94,26 @@ const CountryDetail = ({ country }) => {
         </div>
       </div>
 
+      {/* Play / Stop Sound Buttons */}
+      <div className="flex gap-4 mt-6 justify-center">
+        <button
+          onClick={speakDetails}
+          disabled={isSpeaking}
+          className="bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-2 rounded-full shadow-lg transition disabled:opacity-50"
+        >
+          🔊 Play Voice
+        </button>
+
+        <button
+          onClick={stopSpeaking}
+          disabled={!isSpeaking}
+          className="bg-red-500 hover:bg-red-600 text-white font-semibold px-6 py-2 rounded-full shadow-lg transition disabled:opacity-50"
+        >
+          ⏹️ Stop Voice
+        </button>
+      </div>
+
+      {/* Back to Home Button */}
       <Link
         to="/home"
         className="fixed bottom-6 right-6 bg-primary hover:bg-indigo-700 text-white px-3 py-2 rounded-full shadow-lg transition-all"
