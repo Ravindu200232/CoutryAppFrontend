@@ -64,8 +64,8 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Google Translate (visible on all devices) */}
-        <div id="google_translate_element" className="ml-4" />
+        {/* Google Translate (hidden on small screens) */}
+        <div id="google_translate_element" className="ml-4 hidden sm:block" />
 
         {/* Right Side: Login/Profile & Mobile Toggle */}
         <div className="flex items-center space-x-4 text-white">
@@ -105,30 +105,48 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Dropdown Menu */}
+      {/* Mobile Backdrop */}
       {menuOpen && (
-        <div className="md:hidden flex flex-col px-4 mt-2 gap-3">
-          {user ? (
-            <>
-              <span>Hello, {user.username || user.username}</span>
-              <button
-                onClick={logout}
-                className="bg-white text-blue-600 px-3 py-1 rounded hover:bg-blue-100 transition text-sm"
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            <Link
-              to="/login"
-              className="bg-white text-blue-600 px-3 py-1 rounded hover:bg-blue-100 transition text-sm"
-              onClick={() => setMenuOpen(false)}
-            >
-              Login
-            </Link>
-          )}
-        </div>
+        <div
+          className="fixed inset-0 bg-black bg-opacity-40 z-40"
+          onClick={() => setMenuOpen(false)}
+        />
       )}
+
+      {/* Mobile Dropdown Menu */}
+      <div
+        className={`md:hidden fixed top-[70px] left-0 right-0 bg-gray-800 text-white flex flex-col items-start px-4 py-4 gap-3 z-50 transition-all duration-300 ${
+          menuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0 overflow-hidden"
+        }`}
+      >
+        <Link to="/" onClick={() => setMenuOpen(false)} className="hover:underline">
+          Home
+        </Link>
+        {user && (
+          <Link to="/profile" onClick={() => setMenuOpen(false)} className="hover:underline">
+            Profile
+          </Link>
+        )}
+        {user ? (
+          <>
+            <span>Hello, {user.firstName || user.username}</span>
+            <button
+              onClick={logout}
+              className="bg-white text-blue-600 px-3 py-1 rounded hover:bg-blue-100 transition text-sm"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <Link
+            to="/login"
+            className="bg-white text-blue-600 px-3 py-1 rounded hover:bg-blue-100 transition text-sm"
+            onClick={() => setMenuOpen(false)}
+          >
+            Login
+          </Link>
+        )}
+      </div>
     </nav>
   );
 };

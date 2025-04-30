@@ -46,7 +46,7 @@ export default function Footer() {
         {/* Contact Section */}
         <div className="w-full sm:w-[45%] md:w-1/4 text-center md:text-left">
           <h1 className="text-xl font-semibold mb-4">Get in Touch</h1>
-          <p className="text-gray-400">Email: support@foodOrder.com</p>
+          <p className="text-gray-400">Email: support@WorldWay.com</p>
           <p className="text-gray-400">Phone: +94789840996</p>
           <p className="text-gray-400">Location: 123 colombe Street, NY</p>
         </div>
