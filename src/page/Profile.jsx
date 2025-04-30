@@ -187,13 +187,13 @@ export function Profile() {
                     <div className="flex flex-col sm:flex-row gap-4 mt-6">
                         <button
                             onClick={handleUpdate}
-                            className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700"
+                            className="w-full bg-secondary text-white py-3 rounded-md hover:bg-primary"
                         >
                             Update Profile
                         </button>
                         <button
                             onClick={handleDelete}
-                            className="w-full bg-red-600 text-white py-3 rounded-md hover:bg-red-700"
+                            className="w-full bg-secondary text-white py-3 rounded-md hover:bg-primary"
                         >
                             Delete Account
                         </button>
@@ -220,7 +220,7 @@ export function Profile() {
                         />
                         <button
                             onClick={handleChangePassword}
-                            className="w-full bg-yellow-500 text-white py-3 rounded-md hover:bg-yellow-600"
+                            className="w-full bg-secondary text-white py-3 rounded-md hover:bg-primary"
                         >
                             Change Password
                         </button>
