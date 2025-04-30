@@ -26,12 +26,10 @@ export function Login() {
               id: user._id,
               email: user.email,
               role: user.role,
-              firstName: user.firstName,
-              lastName: user.lastName,
               image: user.image,
             })
           );
-          if (user.role === "cutomer") {
+          if (user.role === "customer") {
             navigate("/");
           } else {
             navigate("/login");
@@ -47,8 +45,6 @@ export function Login() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
- 
 
   // Handle form submit
   const handleSubmit = (e) => {
@@ -147,7 +143,7 @@ export function Login() {
 
       {/* Right Form Section */}
       <div className="w-full md:w-1/2 flex flex-col items-center justify-center p-8 bg-white md:rounded-l-3xl shadow-xl">
-      <img src="/earth.png" className="w-[100px] mb-4"></img>
+        <img src="/earth.png" className="w-[100px] mb-4"></img>
         <div className="max-w-md w-full space-y-8">
           <div>
             <h2 className="text-3xl font-bold text-gray-900 text-center">
