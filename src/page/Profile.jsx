@@ -4,7 +4,6 @@ import Swal from "sweetalert2";
 import mediaUpload from "../utils/mediaUpload";
 import "../css/home.css";
 
-
 export function Profile() {
     const [user, setUser] = useState(null);
     const fileInputRef = useRef();
@@ -52,9 +51,7 @@ export function Profile() {
                 `${import.meta.env.VITE_BACKEND_URL}/api/users/update/${user.id}`,
                 formData,
                 {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
+                    headers: { Authorization: `Bearer ${token}` },
                 }
             );
             Swal.fire("Success", "Profile updated successfully!", "success");
@@ -80,11 +77,7 @@ export function Profile() {
                 const token = localStorage.getItem("token");
                 await axios.delete(
                     `${import.meta.env.VITE_BACKEND_URL}/api/users/${user.id}`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                    }
+                    { headers: { Authorization: `Bearer ${token}` } }
                 );
                 localStorage.clear();
                 Swal.fire("Deleted", "Your account has been deleted.", "success");
@@ -100,22 +93,16 @@ export function Profile() {
         try {
             const token = localStorage.getItem("token");
             const res = await axios.put(
-                `${import.meta.env.VITE_BACKEND_URL}/api/users/update/password/${
-                    user.id
-                }`,
+                `${import.meta.env.VITE_BACKEND_URL}/api/users/update/password/${user.id}`,
                 passwords,
                 {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
+                    headers: { Authorization: `Bearer ${token}` },
                 }
             );
             Swal.fire("Success", res.data.message, "success");
             setPasswords({ oldPassword: "", newPassword: "" });
         } catch (err) {
-            console.error("Password change failed", err);
-            const message =
-                err.response?.data?.message || "Failed to change password.";
+            const message = err.response?.data?.message || "Failed to change password.";
             Swal.fire("Error", message, "error");
         }
     };
@@ -146,86 +133,81 @@ export function Profile() {
     if (!user) return <div className="p-6">Loading profile...</div>;
 
     return (
-        <div className="max-w-xl mx-auto p-8 bg-gradient-to-r   rounded-xl shadow-xl mt-10 backdrop-blur-md">
-            <div className="flex flex-col items-center mb-6">
-                <div
-                    onClick={() => fileInputRef.current.click()}
-                    className="cursor-pointer mb-4"
-                >
-                    <img
-                        src={
-                            formData.image ||
-                            "https://via.placeholder.com/150?text=Upload+Image"
-                        }
-                        alt="Profile"
-                        className="w-32 h-32 object-cover rounded-full border-4 border-white shadow-lg hover:opacity-90 transition-all duration-300"
+        <div className="w-full px-4 sm:px-6 md:px-8 py-8 max-w-2xl mx-auto mt-20">
+            <div className="bg-gradient-to-r from-gray-800 to-gray-700 text-white p-6 rounded-xl shadow-lg">
+                <div className="flex flex-col items-center space-y-4 mb-6">
+                    <div onClick={() => fileInputRef.current.click()} className="cursor-pointer">
+                        <img
+                            src={formData.image || "https://via.placeholder.com/150?text=Upload+Image"}
+                            alt="Profile"
+                            className="w-28 h-28 sm:w-32 sm:h-32 object-cover rounded-full border-4 border-white shadow-lg hover:opacity-90 transition"
+                        />
+                    </div>
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        ref={fileInputRef}
+                        className="hidden"
                     />
+                    <h2 className="text-xl sm:text-2xl font-semibold">Your Profile</h2>
+                    <button
+                        onClick={handleLogout}
+                        className="bg-red-500 px-4 py-2 rounded hover:bg-red-600 text-sm sm:text-base"
+                    >
+                        Logout
+                    </button>
                 </div>
-                <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                    ref={fileInputRef}
-                    className="hidden"
-                />
-                <h2 className="text-3xl font-semibold text-white text-center mb-4">
-                    Your Profile
-                </h2>
-                <button
-                    onClick={handleLogout}
-                    className="bg-primary text-white px-4 py-2 rounded-md hover:bg-secondary transition-all duration-200"
-                >
-                    Logout
-                </button>
             </div>
 
-            <div className="bg-white rounded-lg p-6 shadow-lg">
-                <div className="flex flex-col gap-4">
-                    <label>UserName</label>
-                    <input
-                        type="text"
-                        name="username"
-                        value={formData.username}
-                        onChange={handleChange}
-                        className="border p-3 rounded-md shadow-sm focus:outline-none w-md focus:ring-2 focus:ring-blue-500"
-                        placeholder="First Name"
-                    />
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        disabled
-                        className="border p-3 rounded-md bg-gray-100  w-md cursor-not-allowed"
-                    />
-                    
+            <div className="bg-white rounded-lg p-6 shadow-lg mt-6">
+                <div className="flex flex-col space-y-4">
+                    <div>
+                        <label className="text-gray-700 font-medium">Username</label>
+                        <input
+                            type="text"
+                            name="username"
+                            value={formData.username}
+                            onChange={handleChange}
+                            className="mt-1 block w-full p-3 border rounded-md focus:ring-2 focus:ring-blue-500"
+                            placeholder="Username"
+                        />
+                    </div>
+                    <div>
+                        <label className="text-gray-700 font-medium">Email</label>
+                        <input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            disabled
+                            className="mt-1 block w-full p-3 bg-gray-100 border rounded-md cursor-not-allowed"
+                        />
+                    </div>
 
-                    <div className="flex justify-between mt-6">
+                    <div className="flex flex-col sm:flex-row gap-4 mt-6">
                         <button
                             onClick={handleUpdate}
-                            className="bg-primary text-white px-6 py-3 rounded-md hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
+                            className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700"
                         >
                             Update Profile
                         </button>
                         <button
                             onClick={handleDelete}
-                            className="bg-primary text-white px-6 py-3 rounded-md hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-200"
+                            className="w-full bg-red-600 text-white py-3 rounded-md hover:bg-red-700"
                         >
                             Delete Account
                         </button>
                     </div>
 
-                    {/* Change Password Section */}
+                    {/* Password Change */}
                     <div className="mt-10 border-t pt-6">
-                        <h3 className="text-xl font-semibold text-gray-700 mb-4">
-                            Change Password
-                        </h3>
+                        <h3 className="text-lg font-semibold text-gray-700 mb-4">Change Password</h3>
                         <input
                             type="password"
                             name="oldPassword"
                             value={passwords.oldPassword}
                             onChange={handlePasswordChange}
-                            className="border p-3 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 mr-5"
+                            className="mb-3 w-full p-3 border rounded-md focus:ring-2 focus:ring-yellow-500"
                             placeholder="Old Password"
                         />
                         <input
@@ -233,12 +215,12 @@ export function Profile() {
                             name="newPassword"
                             value={passwords.newPassword}
                             onChange={handlePasswordChange}
-                            className="border p-3 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 mr-5"
+                            className="mb-3 w-full p-3 border rounded-md focus:ring-2 focus:ring-yellow-500"
                             placeholder="New Password"
                         />
                         <button
                             onClick={handleChangePassword}
-                            className="bg-primary text-white px-6 py-3 rounded-md hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all duration-200 mt-4"
+                            className="w-full bg-yellow-500 text-white py-3 rounded-md hover:bg-yellow-600"
                         >
                             Change Password
                         </button>
