@@ -24,11 +24,13 @@ export function Login() {
             "user",
             JSON.stringify({
               id: user._id,
+              username: user.username,
               email: user.email,
               role: user.role,
               image: user.image,
             })
           );
+          console.log(localStorage.getItem("user"));
           if (user.role === "customer") {
             navigate("/");
           } else {

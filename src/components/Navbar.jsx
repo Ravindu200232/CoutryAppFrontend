@@ -19,30 +19,32 @@ const Navbar = () => {
     setMenuOpen(false);
   };
 
-  // Google Translate setup
   useEffect(() => {
+    const initGoogleTranslate = () => {
+      if (window.google && window.google.translate) {
+        new window.google.translate.TranslateElement(
+          {
+            pageLanguage: "en",
+            includedLanguages: "en,si,ta,fr,es,de,zh-CN,hi,ja,ko,ar",
+            layout: window.google.translate.TranslateElement.InlineLayout.HORIZONTAL,
+          },
+          "google_translate_element"
+        );
+      }
+    };
+
     const addGoogleTranslateScript = () => {
       if (!document.getElementById("google-translate-script")) {
         const script = document.createElement("script");
         script.id = "google-translate-script";
-        script.src =
-          "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+        script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
         document.body.appendChild(script);
+      } else {
+        initGoogleTranslate();
       }
     };
 
-    window.googleTranslateElementInit = () => {
-      new window.google.translate.TranslateElement(
-        {
-          pageLanguage: "en",
-          includedLanguages: "en,si,ta,fr,es,de,zh-CN,hi,ja,ko,ar",
-          layout:
-            window.google.translate.TranslateElement.InlineLayout.HORIZONTAL,
-        },
-        "google_translate_element"
-      );
-    };
-
+    window.googleTranslateElementInit = initGoogleTranslate;
     addGoogleTranslateScript();
   }, []);
 
@@ -62,11 +64,8 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Google Translate (Desktop) */}
-        <div
-          id="google_translate_element"
-          className="hidden md:block ml-4"
-        ></div>
+        {/* Google Translate (visible on all devices) */}
+        <div id="google_translate_element" className="ml-4" />
 
         {/* Right Side: Login/Profile & Mobile Toggle */}
         <div className="flex items-center space-x-4 text-white">
@@ -77,7 +76,7 @@ const Navbar = () => {
               </span>
               <Link to="/profile">
                 <img
-                  src={user.image || "/default-profile.png"}
+                  src={user.image}
                   alt="profile"
                   className="w-10 h-10 rounded-full object-cover border border-white"
                 />
@@ -109,7 +108,6 @@ const Navbar = () => {
       {/* Mobile Dropdown Menu */}
       {menuOpen && (
         <div className="md:hidden flex flex-col px-4 mt-2 gap-3">
-          <div id="google_translate_element_mobile" className="mb-2"></div>
           {user ? (
             <>
               <span>Hello, {user.username || user.username}</span>
