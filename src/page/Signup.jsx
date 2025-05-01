@@ -74,11 +74,48 @@ export function Signup() {
 
   return (
     <div className="min-h-screen flex bg-gradient-to-r from-green-100 to-white overflow-hidden">
-      {/* Left Image Grid */}
-      <div className="hidden md:grid md:w-1/2 grid-cols-3 grid-rows-4 gap-2 p-4 h-screen overflow-hidden">
-        {[...Array(8)].map((_, i) => (
-          <img key={i} src={`/${i + 1}.jpg`} alt={`img${i + 1}`} className="w-full h-full object-cover rounded-lg" />
-        ))}
+     {/* Left Grid Section */}
+     <div className="hidden md:grid md:w-1/2 grid-cols-3 grid-rows-4 gap-2 p-4 h-screen overflow-hidden">
+        <img
+          src="/1.jpg"
+          alt="Office workspace"
+          className="col-span-2 row-span-2 w-full h-full object-cover rounded-lg"
+        />
+        <img
+          src="/2.jpg"
+          alt="Collaboration"
+          className="w-full h-full object-cover rounded-lg"
+        />
+        <img
+          src="/3.jpg"
+          alt="Team discussion"
+          className="col-span-1 row-span-2 w-full h-full object-cover rounded-lg"
+        />
+        <img
+          src="/4.jpg"
+          alt="Desk setup"
+          className="w-full h-full object-cover rounded-lg"
+        />
+        <img
+          src="/5.jpg"
+          alt="Brainstorm session"
+          className="w-full h-full object-cover rounded-lg"
+        />
+        <img
+          src="/6.jpg"
+          alt="Meeting room"
+          className="w-full h-full object-cover rounded-lg"
+        />
+        <img
+          src="/7.jpg"
+          alt="Modern office"
+          className="w-full h-full object-cover rounded-lg"
+        />
+        <img
+          src="/8.jpg"
+          alt="Teamwork in action"
+          className="w-full h-full object-cover rounded-lg"
+        />
       </div>
 
       {/* Right Signup Form */}
