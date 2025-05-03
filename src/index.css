@@ -6,3 +6,5 @@
   --color-accent : #FFC107
 
 }
+
+@custom-variant dark (&:where(.dark, .dark *));
