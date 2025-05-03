@@ -9,12 +9,13 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import VerifyEmail from "./page/verifyEmail";
 
 import "./css/home.css";
+import { DarkMode } from "./components/darkMode";
 
 function App() {
   return (
     <GoogleOAuthProvider clientId="870519791887-8h9r383d2ekpe059h4vab0rofknfluu9.apps.googleusercontent.com">
       <BrowserRouter>
-        
+        <DarkMode />
         <Toaster position="top-right" />
         <Routes path="/">
           <Route path="/*" element={<HomePage />} />

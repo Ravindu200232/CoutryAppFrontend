@@ -8,7 +8,7 @@ import { use, useEffect, useState } from "react";
 import axios from "axios";
 import { Login } from "./Login";
 import Footer from "../components/footer";
-import { DarkMode } from "../components/darkMode";
+
 
 export function HomePage() {
   const navigate = useNavigate();
@@ -50,7 +50,7 @@ export function HomePage() {
         {/* Add padding to prevent content hiding behind the navbar */}
         <div className="pt-16 bg-picture">
           <Routes>
-          <DarkMode/>
+         
             <Route path="/*" element={<Home />} />
             <Route path="/profile/*" element={<Profile />} />
             <Route path="/country/:code/*" element={<CountryPage />} />
