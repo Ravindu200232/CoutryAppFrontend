@@ -22,7 +22,7 @@ export function DarkMode() {
   return (
     <button
       onClick={() => setIsDark(!isDark)}
-      className="fixed bottom-4 right-4 z-50 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white px-4 py-2 rounded shadow-lg"
+      className="fixed top-4 right-4 z-50 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white px-4 py-2 rounded shadow-lg"
     >
       {isDark ? "☀️ Light" : "🌙 Dark"}
     </button>
