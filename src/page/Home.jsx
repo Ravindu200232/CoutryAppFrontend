@@ -42,7 +42,7 @@ export function Home() {
 
   const handleToggleFavorite = async (code) => {
     const isFav = favoriteCodes.includes(code);
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token") || localStorage.getItem("token");
     if (isFav) {
       await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/favorite/remove`,

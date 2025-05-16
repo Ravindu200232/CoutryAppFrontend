@@ -8,12 +8,14 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("user")) || null
+     JSON.parse(sessionStorage.getItem("user")) ||JSON.parse(localStorage.getItem("user")) || null
   );
 
   const logout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
+    sessionStorage.removeItem("user");
+    sessionStorage.removeItem("token");
     setUser(null);
     navigate("/login");
     setMenuOpen(false);

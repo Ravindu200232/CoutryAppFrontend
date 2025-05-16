@@ -30,6 +30,23 @@ export function Login() {
               image: user.image,
             })
           );
+
+
+          //session store
+          sessionStorage.setItem("token", res.data.token);
+          sessionStorage.setItem(
+            "user",
+            JSON.stringify({
+              id: user._id,
+              username: user.username,
+              email: user.email,
+              role: user.role,
+              image: user.image,
+            })
+          );
+
+
+
           console.log(localStorage.getItem("user"));
           if (user.role === "customer") {
             navigate("/");
@@ -70,6 +87,21 @@ export function Login() {
         localStorage.setItem("token", res.data.token);
         console.log("token", res.data.token);
         localStorage.setItem(
+          "user",
+          JSON.stringify({
+            id: user._id,
+            email: user.email,
+            role: user.role,
+            username: user.username,
+            image: user.image,
+          })
+        );
+
+        //store session
+
+         sessionStorage.setItem("token", res.data.token);
+        console.log("token", res.data.token);
+        sessionStorage.setItem(
           "user",
           JSON.stringify({
             id: user._id,
